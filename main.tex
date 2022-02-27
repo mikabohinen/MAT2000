@@ -39,6 +39,8 @@
 \usepackage{textcomp}  % Extra symbols
 \usepackage{listings}  % Typesetting code
 \lstset{basicstyle = \ttfamily, frame = tb}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
 
 
 %% Bibliography
@@ -126,13 +128,13 @@
 %% Miscellaneous
 \renewcommand{\qedsymbol}{\(\blacksquare\)}
 
+\usepackage{subfiles}
 
-\title{Awesome title}
+\title{Homotopy Groups of Spheres}
 \author{Mika Bohinen}
 \supervisor{John Christian Ottem}
 % Multiple supervisors: \supervisor{Supervisor 1}{Supervisor 2}...{Supervisor n}
 % Skip supervisor for MAT2500
-
 
 \begin{document}
 
@@ -148,57 +150,11 @@
 
 \chapter{Introduction}
 
-
 Purpose of the paper, historical context, necessary background information and notation.
 
 
-\chapter{Body of the Work}
-
-
-Full proofs, numerical implementations.
-Remember to cite your sources,
-such as \cite{Hel17}.
-
-\begin{theorem}[Pythagoras]
-    \label{thm:pythagoras}
-    In a right triangle,
-    the square of the hypotenuse is equal to the sum of the squares of the other two sides.
-    That is,
-    \begin{equation}
-        \label{eq:pythagoras}
-            a^2 + b^2 = c^2,
-    \end{equation}
-    where \(c\) is the length of the hypotenuse and \(a\) and \(b\) are the lengths of the two other sides.
-\end{theorem}
-
-\begin{proof}
-    Draw a figure.
-\end{proof}
-
-
-\chapter{Conclusions}
-
-
-Optional. Results, consequences, future work.
-
-\cref{tab:numbers} lists some integers satisfying \cref{eq:pythagoras} of \cref{thm:pythagoras}.
-
-\begin{table}[htbp]
-    \centering
-    \begin{tabular}{@{}ccc@{}}
-        \toprule
-        \(\boldsymbol{a}\) & \(\boldsymbol{b}\) & \(\boldsymbol{c}\)
-        \\
-        \midrule
-        3 & 4 & 5
-        \\
-        65 & 72 & 97
-        \\
-        \bottomrule
-    \end{tabular}
-    \caption{Some interesting numbers}
-    \label{tab:numbers}
-\end{table}
+\chapter{Basic Constructions}
+\subfile{chapters/chapter2}
 
 
 \printbibliography
