@@ -1,0 +1,332 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{./figures/}}}
+
+\begin{document}
+This chapter introduces \emph{spectral sequences}
+and uses the cohomological version of the \emph{Serre spectral sequence} to 
+compute the cohomology algebra of certain Eilenberg-MacLane spaces, more
+specifically, the cohomology algebra of \( K(\Z, n) \) for \( n \in \N \). This
+will then provide the final ingredient in our
+proof of the rational homotopy groups of spheres.
+
+Our account of spectral sequences will closely follow 
+\cite[]{Le00} and \cite[]{Ramos}, which the reader should consult for a more thorough
+introduction.
+\section{Brief introduction to spectral sequences}
+Intuitively a spectral sequence is a collection of `pages', which
+are two-dimensional lattices of abelian groups, together with
+differential maps between these such that each page is the (co)homology
+of the previous one. The abelian group structure of each of these pages
+can be captured by the following notion.
+\begin{definition}[Bigraded abelian group]
+    A \emph{bigraded abelian group} \( E_r=E_r^{*, *} \) is a doubly
+    indexed direct sum of abelian groups,
+    \begin{equation}
+        E_r^{*, *} = \bigoplus_{p,q\in\Z} E_r^{p, q}
+    \end{equation}
+    where the ordered pair \( (p, q) \) is called the \emph{bidegree} of
+    the abelian group \( E_r^{p, q} \).
+\end{definition}
+We shall only be interested in the first quadrant,
+i.e., the bidegrees \( (p, q) \) where \( p,q\geq 0 \), and assume
+that the groups \( E_r^{p,q} \) are zero otherwise. We will refer to
+such a group as a \emph{first quadrant bigraded abelian group}. There
+is also a notion of maps between bigraded abelian groups.
+\begin{definition}[]
+    A morphism \( d:A\rightarrow B \) between two bigraded abelian groups
+    \( A \) and \( B \) in bidegree \( (m,n) \) is a collection of
+    group homomorphisms \[ \{d^{p, q}:A^{p, q}\rightarrow B^{p+m, q+n}\}_{p,q\in\Z} \].
+\end{definition}
+We can now give a more formal description of the cohomological version of a spectral sequence.
+\begin{definition}[Spectral sequence]
+    A spectral sequence \( E \) is a sequence of bigraded abelian groups
+    \( E_r \) and endomorphisms \( d_r:E_r\rightarrow E_r \) in bidegree
+    \( (r, r-1) \) for \( r\geq 1 \). Furthermore, each \( d_r \) is
+    a differential in the sense that \( d_r\circ d_r =0 \) and, letting
+   \begin{equation}
+       H^{p,q}(E_r) := \frac{\text{ker}(d^{p,q}_r)}{\text{im}(d^{p-r,q+r-1}_r)},
+   \end{equation} 
+    we require that \( E_{r+1}^{*,*}\cong H^{*, *}(E_r) \). In other
+    words, \( E_{r+1} \) is the cohomology of \( E_r \). 
+\end{definition}
+For a sequence of first quadrant bigraded abelian groups, there is also
+the notion of a \emph{first quadrandt spectral sequence} which is
+just an ordinary spectral sequence \( E \) which has trivial components
+\( E^{p,q}_r=0 \) for all \( p,q < 0 \) and all \( r\geq 0 \).
+
+If there exists some \( n\geq 1 \) such that \( d^r=0 \) for all \( r\geq n \) we say that the spectral sequence collapses at
+the \( n \)--th term. In this case we get that \( E_{r+1}\cong E_r \)
+for all \( r\geq n \), and so one has some semblance of convergence of
+a spectral sequence. To make this notion more precise, we need to
+introduce the concept of a \emph{filtration}.
+\begin{definition}[Filtration of an abelian group]
+    Given an abelian group \( G \) a filtration \( F^*G \) is a
+    sequence of subgroups \( F^iG\subset G \) indexed over the natural numbers
+    such that \( F^j \subset F^i \) for all \( j\geq i \) and \( F^0G=G \).
+When \( G \) is graded we also require that \( F^i G \) be graded for all
+\( i \).
+\end{definition}
+Analogous to ordinary analysis there is also a concept of a \emph{limiting
+term} \( E_\infty \) of a spectral sequence. This comes about by first
+noticing that for any spectral sequence \( E \) we have a sequence
+of sub-objects \[ 0=B_0\subset B_1 \subset \cdots\subset B_r \subset
+\cdots\subset Z_r\subset\cdots\subset Z_1\subset Z_0=E_1 \] where
+\( B_r \) and \( Z_r \) are defined inductively such that \( Z_r/B_{r-1}
+=\text{ker}(d_r)\)
+and \( B_r/B_{r-1}=\text{im}(d_r) \) with \( Z_0:=E_1 \) and \( B_0:=0 \). We then set \( Z_\infty = \cap Z_r \) and \( B_\infty=\cup B_r \).
+
+\begin{definition}[Limiting term]
+    Given a spectral sequence \( E \) the limiting term of \( E \),
+    denoted \( E_\infty \), is given by
+    \begin{equation}
+        E_\infty = \frac{Z_\infty}{B_\infty}.
+    \end{equation}
+\end{definition}
+\begin{definition}[Convergence of spectral sequence]
+    Given a spectral sequence \( E \) and a graded abelian group
+    \( A^* \) with a filtration \( F^*A^* \) we
+    say that the spectral sequence \( E \) converges to \( A^* \) if
+    for all bidegrees \( (p, q) \) there is an isomorphism 
+    \( E_\infty^{p,q}\cong F^pA^{p+q}/F^{p+1}A^{p+q} \). We also
+    write this as
+    \begin{equation}
+        E^{p,q}_r \Longrightarrow A^{p+q}.
+    \end{equation}
+\end{definition}
+If a spectral sequence \( E \) converges to some graded abelian group
+\( A^* \) then there is the question of how to deal with the
+extension problems to determine what \( A^{p+q} \)
+is. However, we are only going to deal with vector spaces over \( \Q \)
+and so the short exact sequence
+\begin{equation}
+    \begin{tikzcd}
+        0 & {F_{i-1}A^*} & {F_iA^*} & {F_iA^*/F_{i-1}A^*} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+    \end{tikzcd}
+\end{equation}
+always splits. That is to say, \( A^{n}\cong\bigoplus_{p+q=n}E^{p,q}_\infty \).
+
+\section{Spectral sequence of algebras}
+Since we are not only interested in the cohomology of Eilenberg-MacLane
+spaces as vector spaces but also as algebras over \( \Q \), it would
+be nice if the spectral sequences could capture this. 
+
+\begin{definition}[Spectral sequence of algebras]
+   A \emph{spectral sequence of algebras} is a spectral sequence \( E \) 
+   such that each page \( (E_r, d_r) \) is a bigraded differential algebra.
+   That is to say, for all \( r\geq 1 \) we have that \( d_r \) is
+   an antiderivation, and there is a product
+   \( E_r \otimes E_r\rightarrow E_r \) such that the product of
+   \( E_{r+1} \) coincides with the one induced by taking the
+   cohomology of \( E_r \). 
+\end{definition}
+With the additional structure of a product operation, we also need to
+impose an extra condition on what it means for a spectral sequence of
+algebras to converge compared to the ordinary convergence of spectral
+sequences. This is because if a spectral sequence of algebras \( E  \)
+converges to some filtered algebra \( A^* \) then we inherently have
+two products, the one induced from \( E_1,E_2\cdots \) on \( E_\infty \)
+as well as the one induced from the filtration of \( A^* \).
+\begin{definition}[Filtration of graded differential algebra]
+    Given a graded differential algebra \( A^* \) a filtration,
+    \( F^*A^* \), is an ordinary filtration of \( A^* \) as a
+    graded abelian group such that \( F^{m}A^*\cdot F^{n}A^*\subset
+    F^{m+n}A^*\).
+\end{definition}
+There is also a canonical induced product for
+    \( [a]\in F^{p}A^{p+q}/F^{p+1}A^{p+q} \) and \( [b]\in F^{p'}A^{p'
+    + q'}/F^{p'+1}A^{p' + q'} \) defined by
+\begin{equation}
+        \label{eq:filtration}
+        [a]\cdot [b] = [a\cdot b] \in F^{p+p'}A^{p + q + p' + q'}/F^{p
+        +p' + 1}A^{p + q + p' + q'}
+\end{equation}
+which is well defined because of the compatibility of the filtration
+with the product.
+
+\begin{definition}[Convergence]
+    A spectral sequence of algebras, \( E \), is said to converge to
+    the graded differential algebra \( A^* \), with a filtration
+    \( F^*A^* \), if it converges to \( A^* \) as a spectral sequence
+    and the product induced on the \( E_\infty \) page coincides with
+    the one in \cref{eq:filtration}.
+\end{definition}
+
+\section{The Leray-Serre spectral sequence}
+The \emph{cohomological Leray-Serre spectral sequence} is the primary computational tool
+needed to compute the cohomology algebra of \( K(\Z, n) \) and was
+discovered by Jean-Pierre Serre in his doctoral thesis~\cite[]{Ser51}.
+To fully state it, we briefly need to discuss a \emph{system of local
+coefficients} on homology, which can be interpreted as a covariant
+functor.
+\begin{definition}[System of local coefficients]
+    Given a space \( X \) and a commutative ring \( R \) a system of local coefficients is a covariant
+    functor \[\mathbb{\mathcal{L}}(X;R):\Pi_1(X)\rightarrow \textbf{Mod}_R \]
+    from the fundamental groupoid of \( X \) to the category of modules
+    over \( R \).
+\end{definition}
+Given any space \( X \) with a system of local coefficients \( \mathcal{L}(X;R)\),
+for some commutative ring \( R \), there is then a modified version of the ordinary singular complex,
+which is defined by
+\begin{equation}
+    C_n(X,\mathcal{L}(X;R)) = \bigoplus_{\sigma\in C_n(X)} \mathcal{L}(
+    X;R)(\sigma(1,0,\ldots,0)).
+\end{equation}
+This also induces a cohomology theory with local coefficients
+obtained by dualizing the homology with local coefficient.
+
+We are now able to state the cohomological Leray-Serre
+spectral sequence as it appears in \cite[]{Le00} .
+\begin{theorem}[Cohomological Leray-Serre spectral sequence]
+    \label{thm:sss}
+   Let \( R \) be a commutative ring with unit and 
+   \( F\rightarrow E \rightarrow B \) a Serre fibration with \( B \) path-connected.
+   There is then a first quadrant cohomological spectral sequence of
+   algebras \( E \) converging to \( H^*(E;R) \) as an algebra with
+   \( E_2^{p,q}\cong H^p(B,\mathcal{H}^q(F;R)) \) where we consider
+   \( \mathcal{H}^q(F; R) \) as a system of local coefficients in the
+   fibre \( F \). Moreover, this spectral sequence is natural with
+   respect to fibre-preserving maps of Serre fibrations. Finally,
+   the cup product \( \smile \) on \( H^p(B,\mathcal{H}^q(F;R)) \) is
+   related to the product \( \cdot_2:E_2\otimes E_2\rightarrow E_2 \) 
+   by \( u\cdot_2 v = (-1)^{p'q}u\smile v \) for \( u\in E^{p,q}_2 \) 
+   and \( v\in E_2^{p',q'} \).
+\end{theorem}
+\begin{proof}
+    See \cite[]{Le00}.
+\end{proof}
+Since \( \pi_1(B) \) induces an action on \( H^*(F) \) in a fibration, the
+following proposition will be helpful when the action is trivial.
+\begin{proposition}
+    \label{prop:coefficients}
+   Let \( F\rightarrow E \rightarrow B \) be a Serre fibration and
+   \( R \) a commutative ring.
+   Suppose \( \pi_1(B) \) acts trivially on \( H^*(F) \), then in
+   the Leray-Serre spectral sequence, we have that
+   \begin{equation}
+       E^{p, q}_2 \cong H^p(B; H^q(F;R)).
+   \end{equation}
+    Moreover, if \( R=k \) is a field, then
+    \begin{equation}
+        E^{p, q}_2 \cong H^p(B;k)\otimes_k H^q(F;k).
+    \end{equation}
+\end{proposition}
+\begin{proof}
+See \cite[]{Hat04}.
+\end{proof}
+
+
+\section{The rational cohomology algebra of Eilenberg-MacLane spaces}
+\begin{definition}[Exterior algebra on a single generator]
+   Let \( k \) be a field. The \emph{exterior algebra} on a single
+   generator \( x \) over \( k \) is defined as
+   \begin{equation}
+       \Lambda_k(x)=\frac{k[x]}{(x^2)}.
+   \end{equation}
+\end{definition}
+\begin{theorem}
+\label{thm:eil-mac}
+The rational cohomology algebra of \( K(\Z, n) \)
+is isomorphic to
+an exterior algebra over \( \Q \)  on a single generator in degree \( n \)
+if \( n \) is odd, and a free graded commutative algebra over \( \Q \) 
+on a single generator if \( n \) is even.
+    
+\end{theorem}
+\begin{proof}
+We proceed by induction. For \( n=1 \) it is undoubtedly true that
+the rational cohomology of \( K(\Z,1)\simeq S^1 \) is an exterior algebra on a generator in
+degree one. Therefore, we assume that the induction hypothesis holds
+for \( n-1 \) when \( n\geq 1 \) and want to show that this implies
+the statement for \( n \). Assume first that \( n \) is even so that
+\( n-1 \) is odd. We now take the path-space fibration of \( K(\Z, n) \)
+and get
+\begin{equation}
+    \begin{tikzcd}
+        {K(\Z,n-1)} & {*} & {K(\Z, n)}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+    \end{tikzcd}
+\end{equation}
+Now, since \( \pi_1(K(\Z, n))=0 \), we get from \cref{prop:coefficients} that the \( E_2 \)--page of
+the Serre spectral sequence takes the form
+\begin{equation}
+    E^{p,q}_2 
+    \cong H^p(K(\Z, n); \Q) \otimes H^q(K(\Z, n-1); \Q).
+\end{equation}
+By assumption we have that \( H^*(K(\Z, n-1); \Q)\cong \Lambda_\Q(y) \),
+where \( \abs{y}=n-1 \), and so we have
+\begin{equation}
+    H^q(K(\Z, n-1); \Q) =
+    \begin{cases}
+        \Q, &\text{ if }q=0, n-1\\
+        0, &\text{ else.}
+    \end{cases}
+\end{equation}
+Since \( * \) has trivial cohomology, the only component that survives
+is \( E_2^{0, 0} \) while all the other on the \( E_2 \)--page must
+die. This implies that \( E_n^{0, n-1}\cong E_2^{0, n-1}\cong \Q_y \) cannot survive to
+the next page and
+so the differential \( d_n^{0, n-1}:E_2^{0, n-1}\rightarrow E_2^{n, 0} \)
+must be injective. This ensures that \( E^{n, 0}_n\cong E^{n,0}_2 \) contains at
+least a \( \Q \). Furthermore, since \( d_n^{n,0}=0 \) it also cannot
+contain more than \( \Q \), and so \( E^{n,0}_n\cong E^{n,0}_2\cong\Q \).
+We then have that \( d_n^{0, n-1} \) is an isomorphism and so we set
+\( x=d_n^{0, n-1}(y) \) to be the generator of \( E^{n,0}_2 \). From
+this we immediately have that 
+\begin{align*}
+    E^{n, n-1}_n &\cong E^{n,n-1}_2 \\
+                 &\cong \Q_x\otimes \Q_y \\
+                 &= \Q_{xy}.
+\end{align*}
+Moreover, by similar reasoning as before, we must have that \( d^{n, n-1}
+_n\) is an isomorphism. Indeed, we have that \( E^{0, kn}_2 \cong\Q \) 
+for all \( k\geq 0 \). Furthermore, by the graded differential
+structure, we see that inductively
+\begin{align*}
+    d_n^{kn, n-1}(x^k y)&= d_n^{kn, 0}(x^k)y + (-1)^{\abs{x^k}}x^k d_n^{0, n-1}(y) \\
+              &= 0 + x^k\cdot x \\
+              &= x^{k+1}.
+\end{align*}
+Thus the generator of \( E_2^{kn, 0} \) is \( x^k \) and so we finally
+get that
+\begin{equation}
+    H^*(K(\Z, n);\Q)\cong E^{*, 0}_2 \cong \Q[x]
+\end{equation}
+which concludes the proof for even \( n \).
+
+Assume now that \( n \) is odd. We then have that \( H^*(K(\Z,n-1))\cong
+\Q[y]\) with \( \abs{y}=n-1 \). Applying the same path-space fibration as before we have that
+\( E_2^{p, q}\cong H^p(K(\Z, n);\Q)\otimes H^q(K(\Z, n-1); \Q)\). By
+similar reasoning as in the even case we must have that \( d_n^{0, n-1} \)
+is an isomorphism. We therefore set \( x=d^{0, n-1}_n(y) \) to be the
+generator of \( E_n^{n, 0}\cong\Q \). Consequently, we have that
+\( xy^k \) is a generator of \( E_2^{n, k(n-1)}\cong E_n^{n, k(n-1)}\cong
+\Q_{xy^k}\) for all \( k\geq 0 \). The claim now is that
+\( E_n^{q, 0}=0 \) for all \( q>n \). To see this, note first that
+we inductively have
+\begin{align*}
+    d_n^{0, k(n-1)}(y^k)&=d_n^{0, n-1}(y)y^{k-1}+(-1)^{\abs{y}}yd_n^{0, (k-1)(n-1)}(y^{k-1})\\
+    &= xy^{k-1} +y(k-1)xy^{k-2} \\
+    &= kxy^{k-1}
+\end{align*}
+which means that \( xy^{k-1} \) is killed by \( \frac{1}{k}y^k \).
+However, this means that \( d^{0, k(n-1)}_n \) is an isomorphism
+for all \( k \geq 1 \), and so we must have that \( E_n^{2n, *}=0 \) for
+degree reasons. We then inductively have that \( E_n^{q, *}=0 \) for
+\( q>n \), which
+implies that
+\begin{align*}
+    H^*(K(\Z, n);\Q)&\cong E_2^{*, 0}\\
+                    &=E_n^{*, 0}\\
+                    &\cong\Q[x]/(x^2) \\
+                    &= \Lambda_\Q(x).
+\end{align*}
+Hence we see that the rational cohomology algebra of \( K(\Z, n) \), for
+odd \( n \), is an exterior algebra on one generator in degree \( n \)
+and so we are done.
+\end{proof}
+\end{document}

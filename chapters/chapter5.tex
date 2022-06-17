@@ -1,0 +1,246 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{./figures/}}}
+\begin{document}
+Having computed the rational cohomology algebra of \( K(\Z, n) \), we are
+now in a position to compute the rational homotopy groups of spheres.
+We shall concentrate on the even and odd-dimensional cases separately,
+and the main ideas of the proof are taken from \cite[]{Ber12}. The
+objective in the odd case is to show that there is a rational homotopy
+equivalence between \( K(\Z, n) \) and \( S^n \), and
+a rational homotopy equivalence between a certain homotopy fibre
+\( F \) and \( S^n \) in the even case.
+
+\section{Odd-dimensional spheres}
+\begin{theorem}[Rational homotopy groups of odd spheres]
+    Let \( n\in \N \) be odd, then
+    \begin{equation}
+        \label{eq:odd}
+        \pi_k(S^n)\otimes \Q =
+        \begin{cases}
+            \Q, &\text{ if } k = n\\
+            0, &\text{ otherwise.}
+        \end{cases}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+If we can find an isomorphism \( f^*:H^*(K(\Z, n);\Q) \rightarrow 
+H^*(S^n; \Q)\) then by \cref{prop:rat-cohomology} we have that
+\( f_*:\pi_*(S^n)\otimes \Q \rightarrow \pi_*(K(\Z, n))\otimes\Q \) is
+an isomorphism and we will be done. We therefore choose \( f:S^n
+\rightarrow K(\Z, n) \) to represent the
+generator of \( \pi_n(K(\Z, n))\). The induced map \( f_*:\pi_n(S^n)
+\rightarrow \pi_n(K(\Z, n))\) must then be an isomorphism. From the
+naturality of the Hurewicz homomorphism and Corollary 1.2.1. in \cite[]{Moe15} 
+we have a commutative diagram:
+\begin{equation}
+    \label{eq:big-commutative}
+    \begin{tikzcd}
+        {\pi_n(S^n)\otimes \Q} & {} & {\pi_n(K(\Z,n))\otimes \Q} \\
+        {H_n(S^n,\Q)} && {H_n(K(\Z,n),\Q)} \\
+        {\text{Hom}_\Q(H_n(S^n,\Q),\Q)} && {\text{Hom}_\Q(H_n(K(\Z,n),\Q),\Q)} && {} \\
+        {H^n(S^n;\Q)} && {H^n(K(\Z,n);\Q)}
+        \arrow["{f_*\otimes\text{id}}", from=1-1, to=1-3]
+        \arrow["{f_*}", from=2-1, to=2-3]
+        \arrow["\cong"', from=1-1, to=2-1]
+        \arrow["\cong", from=1-3, to=2-3]
+        \arrow["\cong"', from=2-1, to=3-1]
+        \arrow["\cong", from=2-3, to=3-3]
+        \arrow["{f^*}", from=3-3, to=3-1]
+        \arrow["{f^*}", from=4-3, to=4-1]
+        \arrow["\cong", from=3-3, to=4-3]
+        \arrow["\cong"', from=3-1, to=4-1]
+    \end{tikzcd}
+\end{equation}
+Since all the vertical maps and the top map are isomorphisms, it follows
+that the horizontal maps are isomorphisms.
+Hence, it follows that \( f^*:H^n(K(\Z, n);\Q)\rightarrow H^n(S^n; \Q ) \) 
+is an isomorphism.
+Then, since both
+\( H^n(K(\Z, n);\Q) \) and \( H^n(S^n, \Q) \) are exterior algebras on
+a single generator in degree \( n \), we must have that \( f^* \)
+extends to an isomorphism in all degrees so that \( f^*:H^*(K(\Z, n);
+\Q)\rightarrow H^*(S^n;\Q)\) is an isomorphism. Then, as remarked earlier,
+\cref{prop:rat-cohomology} implies that \( f_*:\pi_*(S^n)\otimes \Q
+\rightarrow \pi_*(K(\Z, n))\otimes\Q\) is an isomorphism and hence
+we are done.
+\end{proof}
+
+\section{Even-dimensional spheres}
+The rational cohomology algebra of \( K(\Z, n) \) for even \( n \) is,
+by \cref{thm:eil-mac}, isomorphic to \( \Q[x] \). There is therefore
+no map \( f:S^n \rightarrow K(\Z, n) \) which induces an isomorphism
+in cohomology and we cannot use the same strategy as in the odd
+dimensional case and we must take another approach.
+
+
+Let \( g:K(\Z, n)\rightarrow K(\Z, 2n) \) represents the class
+\( x^2\in H^{2n}(K(\Z, n))\cong [K(\Z, n), K(\Z, 2n)] \) and
+\( F \) the homotopy fibre of \( g \).
+\begin{lemma}
+    The rational cohomology algebra of \( F \) is isomorphic to 
+    \( \Lambda_\Q(x) \) with \( \abs{x}=n \).
+\end{lemma}
+\begin{proof}
+   From \cref{prop:fibres} we know that the homotopy fibre of
+   \( F \) with its projection map to \( K(\Z, n) \) is homotopically
+   equivalent to \( K(\Z, 2n-1)\simeq \Omega K(\Z,2n) \). If we
+   therefore also consider the path space fibration of \( K(\Z, 2n) \) 
+   we have the following diagram:
+   \begin{equation}
+       \begin{tikzcd}
+            {\Omega K(\Z, 2n)} & {PK(\Z, 2n)} & {K(\Z, 2n)} \\
+            {\Omega K(\Z, 2n)} & F & {K(\Z, n)}
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-1, to=1-2]
+            \arrow["{\text{id}}", tail reversed, from=2-1, to=1-1]
+            \arrow[from=2-2, to=1-2]
+            \arrow["g"', from=2-3, to=1-3]
+        \end{tikzcd}
+   \end{equation}
+    where the right square commutes and the left square commutes up to
+    homotopy. Letting \( A \) denote the spectral sequence induced
+    by the fibration in the top row and \( B \) the spectral sequence
+    in the bottom row, we also have an induced map \( \alpha:A\rightarrow
+    B\). From \cref{thm:sss} we know that
+    \begin{equation}
+        A^{p,q}_2=H^p(K(\Z, 2n-1);\Q)\otimes H^q(K(\Z, 2n);\Q)\Longrightarrow H^{p+q}(PK(\Z, 2n);\Q)=0.
+    \end{equation}
+    and so, for degree reasons, only \( A^{0, 0}_2=A_{2n}^{0, 0} \) survives on to the \( A_{2n+1
+    } \)--page. This means that all the differentials \[ d_{2n}^{2k, 2n-1}
+    :A_{2n}^{2k, 2n-1}\rightarrow A_{2n}^{2k+2n, 0}\]
+    for \( k\in\N \) are isomorphisms. Of particular interest will be
+    the differential \[ d_{2n}^{0, 2n-1}:A_{2n}^{0, 2n-1}\rightarrow
+    A_{2n}^{2n, 0}\] since, by the naturality
+    of the Serre spectral sequence, and the fact that \( A_2=A_{2n} \),
+    \( B_2=B_{2n}\), 
+    we have a commutative diagram
+    \begin{equation}
+        \begin{tikzcd}
+            {B_{2n}^{0, 2n-1}} && {B^{2n,0}_{2n}} \\
+            \\
+            {A^{0, 2n-1}_{2n}} && {A^{2n,0}_{2n}}
+            \arrow["{d_{2n}^{0, 2n-1}}", from=1-1, to=1-3]
+            \arrow["{d_{2n}^{0, 2n-1}}", from=3-1, to=3-3]
+            \arrow["{\text{id}}", from=3-1, to=1-1]
+            \arrow["{g^*}"', from=3-3, to=1-3]
+        \end{tikzcd}
+    \end{equation}
+    Now, the bottom map is an isomorphism. So if we can show that
+    both of the vertical maps are isomorphisms then the top map must
+    also be an isomorphism by the commutativity of the diagram. Since
+    \( \text{id} \) is obviously an isomorphism, we need only show that
+    \( g^* \) is an isomorphism. Remember
+    that the map \( g^*:H^*(K(\Z, 2n))\rightarrow H^*(K(\Z, n)) \) is induced
+    from the class \[ x^2\in B^{2n, 0}_{2n}\cong H^{2n}(K(\Z,n))\cong[K(\Z, n), K(\Z, 2n)] \] and
+    so if \[ y\in A^{2n, 0}_{2n}\cong H^{2n}(K(\Z, 2n))\cong [K(\Z, 2n),
+    K(\Z, 2n)] \] is the class of the identity map \( \iota_{2n}:K(\Z, 2n)\rightarrow K(\Z, 2n) \), then
+    \begin{equation}
+        g^*(y)=[\iota_{2n}\circ g] = [g]=x^2.
+    \end{equation}
+    Hence the generator of \( A^{2n, 0}_{2n} \) is taken to the generator
+    of \( B^{2n, 0}_{2n} \), so the rightmost map must be an
+    isomorphism. 
+    Thus, since both vertical maps are isomorphisms as well
+    as the bottom map, we must have the top map is also an
+    isomorphism. Then, by the graded differential structure of
+    \( B_{2n} \) we have that all maps \[ d^{2k, 2n-1}_{2n}:B_{2n}^{2k,2n-1}\rightarrow B_{2n}^{2k+2n, 0} \] are
+    isomorphisms. Thus the only terms that survive to the
+    \( B_\infty \)--page are \( B_{2n}^{0, 0} \) 
+    and \( B_{2n}^{n, 0} \), showing that
+    \( B_\infty\cong H^*(F;\Q) \) is an exterior algebra on a single
+    generator in degree \( n \) which was what we wanted to show.
+\end{proof}
+
+\begin{theorem}[Rational homotopy groups of even spheres]
+    Let \( n\in \N \) be even, then
+    \begin{equation}
+        \pi_k(S^n)\otimes \Q =
+        \begin{cases}
+            \Q, &\text{ if }k=n, 2n-1\\
+            0, &\text{ otherwise.}
+        \end{cases}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+Let \( f:S^n\rightarrow K(\Z, n) \) denote the same generator as before
+and \( g:K(\Z, n)\rightarrow K(\Z, 2n) \) the class \( x^2\in H^{2n}(K(\Z
+, n)) \) with \( F \) its homotopy fibre. Since \( \pi_n(K(\Z, 2n))=0 \) 
+we have that \( f \) lifts to \( h:S^n\rightarrow F \) making the
+following diagram commute:
+\begin{equation}
+    \begin{tikzcd}
+        F & {K(\Z, n)} & {K(\Z, 2n)} \\
+        & {S^n}
+        \arrow["{g\circ f\simeq *}"', from=2-2, to=1-3]
+        \arrow["f", from=2-2, to=1-2]
+        \arrow["g", from=1-2, to=1-3]
+        \arrow["p", from=1-1, to=1-2]
+        \arrow["h", dashed, from=2-2, to=1-1]
+    \end{tikzcd}
+\end{equation}
+We know that \( H^*(F;\Q)\cong \Lambda_\Q(x) \) with \( \abs{x}=n \) 
+and so if we can show that \[ h^*:H^*(F;\Q)\rightarrow H^*(S^n; \Q ) \] is an
+isomorphisms then we will be done after applying \cref{prop:fibres}
+together with \cref{prop:rat-cohomology}. Since \( f \) represents
+a generator we have that \[ f_*:\pi_n(S^n)\rightarrow \pi_n(K(\Z, n)) \]
+must be an isomorphism. Then, since \( \pi_n(F)\cong\Z \), we have that
+\[ h_*:\pi_n(S^n)\rightarrow \pi_n(F) \] is also an isomorphism. By
+replacing \( K(\Z, n) \) with \( F \) in (\ref{eq:big-commutative}) we get 
+that \( h^*:H^n(F;\Q)\rightarrow
+H^n(S^n;\Q)\) is an isomorphism. This means that the generator of
+\( H^*(F;\Q) \) is taken to the generator of \( H^*(S^n;\Q) \) which
+means \[ h^*:H^n(F;\Q)\rightarrow H^n(S^n;\Q) \] extends to an
+isomorphism \( h^*:H^*(F;\Q)\rightarrow
+H^*(S^n;\Q)\) and we have found our desired rational
+homotopy equivalence concluding the proof.
+
+\end{proof}
+
+\begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{r|c c c c c c c c c c c c c c c c }
+       & \( \pi_1 \) & \( \pi_2 \) & \( \pi_3 \) & \( \pi_4 \) &   \( \pi_5 \) & \( \pi_6 \) & \( \pi_7 \) & \( \pi_8 \) & \( \pi_9 \) & \( \pi_{10} \) & \( \pi_{11} \) & \( \pi_{12} \) & \( \pi_{13} \) & \( \pi_{14} \) & \( \pi_{15} \) \\
+       \hline
+         \( S^0 \) & \(0 \) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \( S^1 \) & \( \Z \) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+       \( S^2 \) & 0 & \( \Z \) & \( \Z \)  & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{12} \)  & \( \Z_{2} \)  & \( \Z_2 \)  & \( \Z_3 \)  & \( \Z_{15} \)  & \( \Z_2 \)  & \( \Z_2^2 \)  & \( \Z_{12} \times \Z_2\)  & \( \Z_{84}\times\Z_2^2 \)  & \( \Z_2^2 \) \\
+        \( S^3 \) & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{12} \)  & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_3 \)  & \( \Z_{15} \)  & \( \Z_2 \)  & \( \Z_2^2 \)  & \( \Z_{12}\times \Z_2 \)  & \( \Z_{84}\times \Z_2^2 \)  & \( \Z_2^2 \)  \\
+        \( S^4 \) &0  & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z\times\Z_{12} \)  & \( \Z_2^2 \)  & \( \Z_2^2 \)  & \( \Z_{24}\times \Z_3 \)  & \( \Z_{15} \)  & \( \Z_2 \)  & \( \Z_2^3 \)  & \( \Z_{120}\times\Z_{12}\times\Z_2 \)  & \( \Z_{84}\times\Z_2^5 \)  \\
+        \( S^5 \) & 0 & 0 & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{24} \)  & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{30} \)  & \( \Z_2 \)  & \( \Z_2^3 \)  & \( \Z_{72}\times\Z_2 \)  \\
+         \( S^6 \) & 0 & 0 & 0 & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{24} \)  & 0 & \( \Z \)  & \( \Z_2 \)  & \( \Z_{60} \)  & \( \Z_{24}\times\Z_2 \)  & \( \Z_2^3 \) \\
+             \( S^7 \) & 0  & 0 & 0 & 0 & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{24} \)  & \( 0 \)  & 0 & \( \Z_2 \)  & \( \Z_{120} \)  & \( \Z_2^3 \) \\
+         \( S^8 \) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \( \Z \) & \( \Z_2 \)  & \( \Z_2 \)  & \( \Z_{24} \)  & 0 & 0 & \( \Z_2 \)  & \( \Z\times\Z_{120} \)  
+    \end{tabular}}
+    \caption{Low dimensional homotopy groups of spheres. Adapted from https://en.wikipedia.org/wiki/Homotopy\_groups\_of\_spheres.}
+    \label{tab:groups}
+\end{table}
+
+In \cref{tab:groups} we can see some of the low dimensional homotopy groups
+of spheres. According to what we have just showed, we remark that the
+only non-torsion groups are exactly where we expect them to be in
+the table.
+Computing
+all of these groups goes well beyond the scope of this paper, but it
+is worth mentioning that the approach we have taken here with spectral
+sequences can be used to compute some of these groups. For example,
+the group \( \pi_4(S^3)=\Z_2 \) can be computed using the fibration
+\( f:S^3\rightarrow K(\Z, 3) \), with \( f \) the generator as before.
+Spectral sequences also appear once one wishes to compute \emph{stable
+homotopy groups of spheres}, most notably through the Adams spectral
+sequence and the Adams-Novikov spectral sequence. Indeed, in studying
+homotopy groups of spheres, spectral sequences provide an invaluable
+tool. We should also mention that there are other approaches to computing the rational homotopy
+groups of spheres which don not use spectral sequences,
+see for example \cite[]{KlMa04}, and which develop other machinery for
+the proof. 
+
+A natural next step in studying homotopy groups of spheres might
+be to try to understand the torsion part of the low dimensional groups
+in \cref{tab:groups}. As mentioned above, we can use spectral sequences
+for some of them, but other groups have to be computed by other
+methods, and the interested reader is referred to Chapter 4 of
+\cite[]{Hat02} for a treatment of some of these.
+\end{document}

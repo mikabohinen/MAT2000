@@ -1,42 +1,42 @@
 \documentclass[../main.tex]{subfiles}
 \graphicspath{{\subfix{./figures/}}}
 \begin{document}
-In this chapter our main goal will to be develop all the tools we need
-for what is to come. We start out by defining homotopy groups inductively
-as loop spaces before moving on to some other stuff.
 
 \section{Homotopy groups as loop spaces}
-One normally defines the homotopy group \( \pi_n(X,p) \) of a pointed
+One often defines the homotopy group \( \pi_n(X,p) \) of a pointed
 topological space \( (X,p) \) to be the homotopy classes of maps
-\( f:(I^n, \partial I^n)\rightarrow (X, p) \). We shall take a slightly
-different approach in our definition, but one could just as well have used
-this definition and none of the results would change.
+\( f:(I^n, \partial I^n)\rightarrow (X, p) \). However, we shall adopt
+the approach taken in \cite[]{BoTu82} and define them in terms of 
+\emph{loop spaces}.
 
-To start off we need the concept of a \emph{loop space} as it appears in
-\cite{BoTu82} .
-\begin{definition}[Loop space]
-   For a topological space \( X \) and a point \( p \in X \)
-   we define the loop space of \( X \)
-   to be the space \( \Omega_p X \) which consists of continuous maps \( f \)
-   from the unit circle \( S^1 \)(realized as the set \( \{z \in 
-   \C : \abs{z}=1\}  \)) into X such that \( f(1)=p \). In order for
-   \( \Omega_p X \) to be a topological space we equip it with the
-   compact open topology.
+\begin{definition}[Path space]
+Given a based space \( (X, p) \), the \emph{path space} \( PX=X^I \) is the set
+of based maps from the unit interval \( I=[0,1] \) to \( X \) endowed
+with the compact open topology such that \( f(0)=p \).
 \end{definition}
-With the definition of a loop space we can then use this to inductively
-define \( \pi_n(X, p) \) for arbitrary \( n \).
+There is a canonical map \( \chi:PX\rightarrow X \) given by \( \chi(f)=f(1) \). The loop space of \( X \) can then be described as a fibre
+of this map.
+
+\begin{definition}[Loop space]
+   For a based space \( (X, p) \),
+   we define the loop space of \( X \)
+   as the space \( \Omega X=\chi^{-1}(p) \) endowed with the subspace
+   topology.
+\end{definition}
 \begin{definition}[Homotopy groups]
-   The \( 0 \)th homotopy group \( \pi_0 (X, p) \) of a pointed topological space
-   is defined to be its path components. For the inductive step
-   we set the \( n+1 \)th homotopy group to be \( \pi_{n+1}(X,p) = \pi_n(\Omega_{p}X, \overline{p})\)
+   \label{def:homotopy-groups}
+   The \( 0 \)th homotopy group, \( \pi_0 (X, p) \), of a pointed topological space
+   is defined to be its path components. For the inductive step,
+   we set the \( n+1 \)th homotopy group to be \( \pi_{n+1}(X,p) = \pi_n(\Omega_{p}X, \overline{p})\),
    where \( \overline{p} \) is the constant map to the point \( p \).
 \end{definition}
-With the operation of composition of loops this turns the homotopy
+The operation of the composition of loops turns the homotopy
 groups into actual groups where the constant map acts as the identity,
 and the inverse is just the reversal of each loop.
 
 
-\section{Suspension and the smash product}
+
+\iffalse \section{Suspension and the smash product}
 With a firm grasp on the definition of homotopy groups we can begin
 to introduce some of the main tools and concept we shall need in
 studying them. Two of the most basic of these is the \emph{suspension} of a
@@ -73,13 +73,14 @@ examples as it can be shown in general that \( S^n \wedge S^m
 Both of the operators defined above are operators which
 plays an integral role in the theory of higher homotopy groups. We shall
 frequently encounter these in the following chapters.
+\fi
 
-\section{Serre fibrations and fiber bundles}
-Another crucial component in the study of homotopy groups of spheres is
-long exact sequences of said groups. To this end we need to be able
+\section{Serre fibrations}
+Another crucial component of studying homotopy groups of spheres are
+long exact sequences of said groups. To this end, we need
 to understand when these can occur. As we shall see, this is the case
 when we have a \emph{Serre fibration}. In order to understand the
-definition of a Serre fibration we first need some preliminary notions,
+definition of a Serre fibration, we first need some preliminary notions,
 more specifically, the homotopy lifting property. We shall define this
 as it appears in \cite{Mit01}.
 
@@ -92,7 +93,7 @@ as it appears in \cite{Mit01}.
          \item an initial map \( \tilde{F}_0:X\rightarrow E \) such
             that \(F_0 = p\circ \tilde{F}_0 \)
       \end{enumerate}
-   there exist a map \( \tilde{F} \) making the diagram in \cref{fig:homotopy-lifting-property}
+   there exists a map \( \tilde{F} \) making the diagram in \cref{fig:homotopy-lifting-property}
    commute.
 \end{definition}
 \begin{figure}
@@ -112,69 +113,329 @@ as it appears in \cite{Mit01}.
    \label{fig:homotopy-lifting-property}
 \end{figure}
 
-With this definition in mind we say that \( p:E\rightarrow B \) is a
+We say that \( p:E\rightarrow B \) is a
 Serre fibration if \( p \) has the homotopy lifting property for all
 CW-complexes. One also has the notion of a general \emph{fibration} in
 which the requirement is that \( p \) must have the homotopy extension
 property for all spaces and not just the CW-complexes.
 
-An important class of Serre fibrations are \emph{fiber bundles} which
-we now shall now define.
-We shall define a fiber bundle as it appears in \cite[p.~376--377]{Hat02}. To start off we need to understand the notion of a fiber.
-\begin{definition}[Fiber]
-    \label{def:fiber} 
-    For spaces \( E \) and \( B \), a surjective map \( p:E\rightarrow B \),
-    and a point \( b \in B \) we shall call the set \( p^{-1}(b) \)
-    the \emph{fiber} of \( b \). If there exists a space \( F \) such
-    that for all points \( b\in B \) we have \( p^{-1}(b)\cong F \) then
-    we simply refer to \( F \) as the fiber of \( B \).
-\end{definition}
-We now just need one more technical notion before introducing the
-definition of a fiber bundle.
-\begin{definition}[Local trivialization]
-    Let \( F \), \( E \), \( B \) be spaces with a map \( p:E\rightarrow B \)
-    such that \( F \) is a fiber of \( B \). If there exists an open
-    covering \( \{U_i\} \) of \( B \) such that for all \( U_i \) there
-    is a corresponding homeomorphism \\ \( \varphi_i:p^{-1}(U_i)\rightarrow
-    U_i\times F\) which makes the diagram in \cref{fig:local-triv}
-    commute, then the collection \( \{(U_i, \varphi_i)\} \) is called
-    a \emph{local trivialization} of the spaces.
-\end{definition}
-With that out of the way we are now ready for the definition of a fiber
-bundle.
-\begin{definition}[Fiber Bundle]
-    \label{def:fiber-bundle}
-    A fiber bundle, denoted \( (E, B, p, F) \), is a
-    structure consisting of spaces \( E \), \( B \), and a fiber
-    \( F \) of \( B \), with the corresponding surjection \( p :E\rightarrow B \).
-    The space \( E \) is called the \emph{total space}, \( B \) is
-    called the \emph{base space}, and the map 
-    \( p \) is called the \emph{projection map}. We furthermore
-    require that there exists a local trivialization of the spaces
-    in the bundle.
-    Another way to denote a fiber bundle is as
-    \begin{equation}
-        \label{eq:exact-seq}
-        \begin{tikzcd}
-            F \arrow[r]  & E \arrow[r, "p"]  & B
-        \end{tikzcd}
-    \end{equation}
-\end{definition}
-\begin{figure}[b]
-    \centering
-    \begin{tikzcd}
-    p^{-1}(U) \arrow[rdd, "p"'] \arrow[rr, "\varphi_i"] &   & U\times F \arrow[ldd] \\
-                                            &   &                       \\
-                                            & U &   
-    \end{tikzcd}
-    \caption{The unlabeled map is the projection onto the first factor.}
-    \label{fig:local-triv}
-\end{figure}
+For our purposes, a fundamental property of fibrations is that they admit
+a long exact sequence of homotopy groups.
+\begin{proposition}
+  Given a Serre fibration \( p:E \rightarrow B \) with basepoint
+  \( b_0\in B \) let \(  F=p^{-1}(b_0) \) and
+  \( x_0\in F \). There is then a long exact sequence of homotopy
+  groups
+  \begin{equation}
+     \begin{tikzcd}
+          \cdots & {\pi_n(F,x_0)} & {\pi_n(E,x_0)} & {\pi_n(B,b_0)} & {\pi_{n-1}(F,x_0)} & \cdots 
+          \arrow[from=1-1, to=1-2]
+          \arrow[from=1-5, to=1-6]
+          \arrow[from=1-2, to=1-3]
+          \arrow["{p_*}", from=1-3, to=1-4]
+          \arrow[from=1-4, to=1-5]
+      \end{tikzcd}
+  \end{equation}
 
-Our claim now is that fiber bundles are examples of Serre fibrations.
+\end{proposition}
+\begin{proof}
+   See section 4.2 of \cite[]{Hat02}.
+\end{proof}
+
+The \emph{path space fibration} of \( X \) gives a canonical class of
+fibrations for any space \( X \).
+
+\begin{proposition}[Path space fibration]
+   Given any based space \( (X,x_0) \), the map \( \chi:PX\rightarrow X \) is a
+   Serre fibration with fibre \( \Omega X \).
+\end{proposition}
+\begin{proof}
+   See \cite[]{Felix}.
+\end{proof}
+
+\begin{example}[Hopf fibration]
+\label{ex:hopf}
+An important historical example of a Serre fibration is the Hopf fibration
+\begin{equation}
+\label{eq:hopf}
+\begin{tikzcd}
+	{S^1} & {S^3} & {S^2}
+	\arrow[from=1-1, to=1-2]
+	\arrow["p", from=1-2, to=1-3]
+\end{tikzcd}
+\end{equation}
+where \( p:S^3 \rightarrow S^2 \) is defined as \( p(z, w)=[z:w] \), 
+thinking of \( S^3 \) as the unit sphere in \( \C^2 \) and \( S^2 \) as
+\( \C P^1 \). For proof that this is a Serre fibration, the reader is
+referred to \cite[]{Hat02}. We know that \( \pi_i(S^n)=0 \) for \( i<n \)
+, see \cite[]{Hat02}, and so the only interesting part of the long
+exact sequence associated with the Hopf fibration is
+\begin{equation}
+   \begin{tikzcd}
+       0 & {\pi_3(S^3)} & {\pi_3(S^2)} & 0
+       \arrow[from=1-1, to=1-2]
+       \arrow["{p_*}", from=1-2, to=1-3]
+       \arrow[from=1-3, to=1-4]
+   \end{tikzcd}
+\end{equation}
+Thus, \( p_*:\pi_3(S^3)\rightarrow \pi_3(S^2) \) is an
+isomorphism. Moreover, by the Hurewicz theorem; \( \pi_3(S^3)\cong\Z \) and
+one of the generators is represented by the identity map \( \iota:
+S^3\rightarrow S^3\). From this, we get that \( \pi_3(S^2)\cong\Z \) and
+that one of the generators are
+\begin{align*}
+   p_*([\iota]) &= [p\circ \iota] \\
+                &= [p],
+\end{align*}
+which means that the Hopf fibration \( p:S^3\rightarrow S^2 \) represents
+the generator of \( \pi_3(S^2) \). The historical importance of this
+result is that this showed that homotopy groups behave different compared
+to homology groups. So much more care is needed when thinking about
+\( \pi_{k+n}(S^n) \) in general. For a more comprehensive discussion
+of the Hopf fibration, the reader is referred to \cite[]{Lyo03}.
+\end{example}
+\section{Homotopy fibres}
+One of the main ingredients in our proof for the rational homotopy groups of even
+spheres is the use of \emph{homotopy fibres}.
+\begin{definition}[Mapping fibration]
+Let \( f:Y\rightarrow X \) be a map between spaces. We then define
+the set \( P(f) \) to be the fibreed product
+\begin{equation}
+   P(f) = X^I\times_X Y = \{(\alpha, y)\hspace{1mm} | \hspace{1mm} \alpha(1)=f(y)\}.
+\end{equation}
+The map \( p:P(f)\rightarrow X \), defined by \( p(\alpha, y)=\alpha(0) \),
+then gives the \emph{mapping fibration} of \( f \).
+\end{definition}
+This gives us a way of associating a fibration to any map.
+\begin{proposition}
+  Given a map \( f:Y\rightarrow X \), the mapping fibration \(p:P(f)\rightarrow X  \) 
+  is a Serre fibration.
+\end{proposition}
+\begin{proof}
+   See \cite[]{DaKi12}.
+\end{proof}
+
+\begin{definition}[Homotopy fibre]
+   Given a map \( f:Y\rightarrow X \) and a point \( x\in X \), we
+   define the homotopy fibre of \( f \) over \( x \) as
+   the fibre \( p^{-1}(x) \) of the mapping fibration.
+\end{definition}
+
+The fact that the mapping fibration is a Serre fibration lets us view
+any map \( f: Y\rightarrow X \) 
+as a fibration up to homotopy in light of the following proposition.
 
 \begin{proposition}
-   A fiber bundle \( (F, E, p, B) \) satisfy the homotopy lifting
-   property for all spaces \( X \).
+   Let \( f: Y\rightarrow X \) be any map, then there is a
+   homotopy equivalence \( \phi:Y\rightarrow P(f) \), which makes the
+   following diagram commute
+   \begin{equation}
+      \begin{tikzcd}
+          Y & {} & {P(f)} \\
+          && {} \\
+          && X
+          \arrow["f"', from=1-1, to=3-3]
+          \arrow["\phi", from=1-1, to=1-3]
+          \arrow["p", from=1-3, to=3-3]
+      \end{tikzcd}
+   \end{equation}
 \end{proposition}
+\begin{proof}
+   Define \( \phi:Y\rightarrow P(f) \) by \( \phi(y)=(c_{f(y)}, y) \)
+   where \( c_{f(y)} \) is the constant path at \( f(y) \). Let now
+   \( \psi:P(f)\rightarrow Y \) be given by \( \psi(\alpha, y)=y \).
+   Then \( \psi\circ\phi = \text{id}_Y \), and so we only need to show
+   that \( \phi\circ\psi \simeq \text{id}_{P(f)} \). Now, if
+   \( (\alpha, y)\in P(f) \), then \( (\phi\circ\psi)(\alpha, y)=(c_{f(y)}, y) \),
+   and so all we need do is find a homotopy between the constant path
+   \( c_{f(y)} \) and \( \alpha \). This is easy enough; let
+   \( \alpha_t \) be the restriction of \( \alpha \) to the interval
+   \( [t, 1] \) with the necessary re-parameterization. We then
+   define the homotopy \( F:P(f)\times [0,1]\rightarrow P(f) \) by
+   \( F((\alpha, y), t)=(\alpha_t, y) \). Since, by construction, we have
+   \( \alpha_1 = c_{f(y)} \) we see that \( F((\alpha, y), 0)=(\alpha,y)=\text{id}_{P(f)}(\alpha, y) \) and \( F((\alpha, y), 1)=(c_{f(y)},y)=(\phi\circ\psi)(\alpha, y) \).
+   We thus see that \( \phi \) is a homotopy equivalence, and it is also
+   evident that \( \phi \) makes the diagram commute.
+   
+\end{proof}
+Using this fact, we can replace \( P(f) \) with \( Y \) in the long
+exact sequence associated with the mapping fibration \( p:P(f)\rightarrow X \).
+This, in turn, is going to allow us to compute the homotopy groups
+of the homotopy fibre of a homotopy fibre
+which in the case of some \emph{Eilenberg-MacLane spaces} shows that
+this is a new Eilenberg-MacLane space.
+\section{Eilenberg-MacLane spaces}
+Eilenberg-MacLane spaces first appeared in \cite[]{EiMa}, and their rational
+cohomology will play a crucial role in the  
+proof of the rational homotopy groups of spheres. So we shall now
+give an account of the critical features of these spaces, which we need
+to study the rational homotopy groups of spheres.
+\begin{definition}[Eilenberg-MacLane spaces]
+   For \( n\in \N \) and \( G \) a group, we say that a space \( X \) 
+   is an Eilenberg-MacLane space of type \( K(G, n) \) if its \( n \)th homotopy group is equal
+   to \( G \) and otherwise trivial.
+\end{definition}
+From this definition and \cref{def:homotopy-groups}, it is clear that
+\[ \Omega K(G,n)\simeq \Omega K(G, n-1) \] for \( n>1 \). Noting the fact that
+\( PK(G, n)\simeq * \) one gets a useful fibration by applying the
+path space fibration, which in this case becomes
+\begin{equation}
+   \begin{tikzcd}
+	{K(G,n-1)} & {*} & {K(G,n)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+   \end{tikzcd}
+\end{equation}
+Applying the \emph{Serre spectral sequence} to this fibration
+shall allow us to compute the rational cohomology of \( K(\Z, n) \).
+
+Another crucial aspect of Eilenberg-MacLane spaces for our purposes
+is its connection to cohomology.
+\begin{proposition}
+\label{prop:mapping-space}
+  For an abelian group \( G \) and \( n \in \N \) there is a natural
+  bijection for all CW-complexes \( X \) between the space \( [X, K(G, n)] \), the space of
+  homotopy classes of maps from \(X  \) to \( K(G, n) \), and 
+  \( H^n(X;G) \), the \( n \)th cohomology group of \( X \) with
+  coefficients in \( G \). Endowing \( [X, K(G, n)] \) with a
+  canonical group structure this turns into a natural isomorphism.
+ 
+\end{proposition}
+\begin{proof}
+  See Section 4.2 in \cite[]{Hat02}.
+\end{proof}
+To conclude this section, let \( f:K(\Z, n)\rightarrow K(\Z, 2n) \) be
+any map. If we choose some basepoint \( x_0\in K(\Z, 2n) \), we let
+\( A \) denote the homotopy fibre of \( f \) over \( x_0 \) with
+induced map \( \alpha:A\rightarrow K(\Z, n) \). We then choose a
+basepoint \( a_0\in A \) and let \( B \) be the homotopy fibre of
+\( \alpha \) over \( a_0 \) with induced map \( \beta:B\rightarrow A \) .
+\begin{proposition}
+\label{prop:fibres}
+   The homotopy groups \( \pi_k(A) \) are infinite cyclic for
+   \( k=n, 2n-1 \), and otherwise trivial. On the other hand,
+   \( B \) is an Eilenberg-MacLane space of type
+   \( K(\Z, 2n-1) \).
+\end{proposition}
+\begin{proof}
+   We first compute \( \pi_k(A) \) using the long exact sequence
+   of the fibration
+   \begin{equation}
+      \begin{tikzcd}
+          A & {} & {K(\Z, n)} && {K(\Z, 2n)}
+          \arrow[""{name=0, anchor=center, inner sep=0}, "\alpha", from=1-1, to=1-3]
+          \arrow["f", from=1-3, to=1-5]
+      \end{tikzcd}
+   \end{equation}
+   Looking at a section of the exact sequence, we have
+   \begin{equation}
+      \begin{tikzcd}
+          \cdots & {\pi_k(A)} & {\pi_k(K(\Z, n))} & {\pi_k(K(\Z,2n))} & \cdots
+          \arrow[from=1-4, to=1-5]
+          \arrow["{f_*}", from=1-3, to=1-4]
+          \arrow["{\alpha_*}", from=1-2, to=1-3]
+          \arrow[from=1-1, to=1-2]
+      \end{tikzcd}
+   \end{equation}
+   From this we see that when \( k=n \) we have \( \pi_{n+1}(K(\Z, 2n))=
+   \pi_n(K(\Z, 2n))=0\) and so \( \alpha_* \) is an isomorphism for \( k=n \) 
+   and hence \( \pi_n(A)=\Z \). A similar computation shows that
+   \( \pi_{2n-1}(A)=\Z \). Now, if \( k\neq n, 2n-1 \) then \( \pi_{k+1}(K(\Z, 2n))=\pi_k(K(\Z, n))=0 \)
+   and so, necessarily, \( \pi_k(A)=0 \) showing the result for \( A \).
+
+   Using the homotopy groups of \( A \) we then take a look at the
+   fibration given by
+   \begin{equation}
+      \begin{tikzcd}
+          B && A && {K(\Z, n)}
+          \arrow["\beta", from=1-1, to=1-3]
+          \arrow["\alpha", from=1-3, to=1-5]
+      \end{tikzcd}
+   \end{equation}
+   Again, taking a section of the long exact sequence, we get
+   \begin{equation}
+      \begin{tikzcd}
+          \cdots & {\pi_k(B)} & {\pi_k(A)} & {\pi_k(K(\Z,n))} & \cdots
+          \arrow[from=1-1, to=1-2]
+          \arrow["{\beta_*}", from=1-2, to=1-3]
+          \arrow["{\alpha_*}", from=1-3, to=1-4]
+          \arrow[from=1-4, to=1-5]
+      \end{tikzcd}
+   \end{equation}
+   For \(k =2n-1 \) we have that \( \beta_* \) is an isomorphism
+   so that \( \pi_{2n-1}(B)\cong\Z \). The only non-obvious part
+   of the sequence is
+   \begin{equation}
+      \begin{tikzcd}
+          0 & {\pi_n(B)} & \Z & \Z & {\pi_{n-1}(B)} & 0
+          \arrow[from=1-1, to=1-2]
+          \arrow["{\beta_*}", from=1-2, to=1-3]
+          \arrow["{\alpha_*}", from=1-3, to=1-4]
+          \arrow["{\partial_*}", from=1-4, to=1-5]
+          \arrow[from=1-5, to=1-6]
+      \end{tikzcd}
+   \end{equation}
+   By exactness we have that 
+   \begin{equation}
+      \label{eq:exactness}
+      \pi_{n-1}(B)\cong \frac{\Z}{\text{im}(\alpha_*)}.
+   \end{equation}
+   Furthermore,
+   \begin{equation}
+      \text{im}(\alpha_*)\cong \frac{\Z}{\text{im}(\beta_*)}
+   \end{equation}
+   and so the only way for the quotient in \ref{eq:exactness} to make
+   sense is if \( \text{im}(\beta_*)=0 \), but then \( \pi_n(B)=0 \)
+   and \( \pi_{n-1}(B)\cong \Z/\Z \cong 0 \), showing that the only
+   non trivial homotopy group is \( \pi_{2n-1}(B)=\Z \). We, therefore,
+   must have that \( B \) is an Eilenberg-MacLane space of type
+   \( K(\Z, 2n-1) \) which was what we wanted to show and so we are done.
+\end{proof}
+
+
+\section{Rational homotopy equivalence}
+As mentioned in the introduction, one of the main ideas for the proof
+of \cref{eq:even-spheres} and \cref{eq:odd-spheres} is to construct
+a rational homotopy equivalence between the spheres and some other space.
+We want to use the algebra structure in cohomology,
+so the following results will be essential to us.
+\begin{definition}[Rational homotopy equivalence]
+    Let \( f:X\rightarrow Y \) be a map. We say that \( f \) is a
+    \emph{rational homotopy equivalence} if the induced map on
+    rationalized homotopy groups, \( \pi_*(f)\otimes\Q:\pi_*(X)\otimes
+    \Q\rightarrow\pi_*(Y)\otimes\Q\), is an isomorphism.
+\end{definition}
+This weakens the criterion of weak homotopy equivalence, which requires
+that \( \pi_*(f):\pi_*(X)\rightarrow\pi_*(Y) \) be an isomorphism. Thus,
+every homotopic and every weakly homotopic space is rationally homotopic.
+It turns out, due to a result of Serre, that the above definition is
+equivalent to requiring that the induced map in homology with rational
+coefficients is an isomorphism.
+\begin{proposition}
+    Let \( f:X \rightarrow Y \) be a map between spaces. Then, \( f \)
+    is a rational homotopy equivalence if and only if the induced
+    map \( f_*:H_*(X;\Q)\rightarrow H_*(Y;\Q) \) is an isomorphism.
+\end{proposition}
+\begin{proof}
+    See \cite[]{Ser53}.
+\end{proof}
+We also have a similar result for cohomology, which requires the notion
+of a \emph{uniquely divisible group}.
+\begin{definition}[Uniquely divisible group]
+    An abelian group \( G \) is said to be \emph{divisible} if for all
+    \( g \in G \), and all positive integers \( n \), there exists \( y
+    \in G\) such that
+    \( ny=g \). The group is uniquely divisible if \( y \) is unique.
+\end{definition}
+\begin{proposition}
+   \label{prop:rat-cohomology}
+   For any map \( f:X \rightarrow Y \), we have that it is a rational
+   homotopy equivalence if and only if for any uniquely divisible
+   abelian group \( G \) the induced map \( f^*:H^*(Y;G)\rightarrow 
+   H^*(X;G)\) is an isomorphism.
+\end{proposition}
+\begin{proof}
+    See \cite[]{Ber12}.
+\end{proof}
+
 \end{document}

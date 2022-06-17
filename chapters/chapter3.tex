@@ -1,0 +1,50 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{./figures/}}}
+\begin{document}
+The purpose of this chapter is to give the necessary background information
+in rational homotopy theory for our proof of the rational homotopy groups
+of spheres. We shall give the definition of a rational homotopy
+equivalence and state some elementary results concerning these
+equivalences. Much of what we do here is taken from Chapter 4 of \cite[]{Ber12}.
+
+\section{Rational homotopy equivalence}
+\begin{definition}[Rational homotopy equivalence]
+    Let \( f:X\rightarrow Y \) be a map. We say that \( f \) is a
+    \emph{rational homotopy equivalence} if the induced map on
+    rationalized homotopy groups, \( \pi_*(f)\otimes\Q:\pi_*(X)\otimes
+    \Q\rightarrow\pi_*(Y)\otimes\Q\), is an isomorphism.
+\end{definition}
+This weakens the criterion of weak homotopy equivalence which requires
+that \( \pi_*(f):\pi_*(X)\rightarrow\pi_*(Y) \) be an isomorphism. Thus,
+both every homotopic and weakly homotopic spaces are rationally homotopic.
+It turns out, due to a result of Serre, that the above definition is
+equivalent to requiring that the induced map in homology with rational
+coefficients is an isomorphism.
+\begin{proposition}
+    Let \( f:X \rightarrow Y \) be a map between spaces. Then, \( f \)
+    is a rational homotopy equivalence if and only if the induced
+    map \( f_*:H_*(X;\Q)\rightarrow H_*(Y;\Q) \) is an isomorphism.
+\end{proposition}
+\begin{proof}
+    See \cite[]{Ser53}.
+\end{proof}
+We also have an analogous result for cohomology which requires the notion
+of a \emph{uniquely divisible group}.
+\begin{definition}[Uniquely divisible group]
+    An abelian group \( G \) is said to be \emph{divisble} if for all
+    \( g \in G \) and all positive integers \( n \) there exists \( y
+    \in G\) such that
+    \( ny=g \). The group is uniquely divisible if \( y \) is unique.
+\end{definition}
+\begin{proposition}
+   \label{prop:rat-cohomology}
+   For any map \( f:X \rightarrow Y \) we have that it is a rational
+   homotopy equivalence if and only if for any uniquely divisible
+   abelian group \( G \) the induced map \( f^*:H^*(Y;G)\rightarrow 
+   H^*(X;G)\) is an isomorphism.
+\end{proposition}
+\begin{proof}
+    See \cite[]{Ber12}.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{./figures/}}}
+\begin{document}
+Homotopy groups of spheres are notoriously difficult to compute. This is in
+stark contrast to the homology groups of spheres that are trivial except
+for the zeroth dimension and the dimension of the sphere itself.
+Heinz Hopf provided in 
+\cite[]{Hop31} the first example of this difference via the construction
+of a non-trivial mapping \( p:S^3\rightarrow S^2 \).
+Indeed, this mapping is a generator of the infinite cyclic group
+\( \pi_3(S^2) \), as shown in \cref{ex:hopf}. Considering this, one would very much like to be able
+to compute \( \pi_{n+k}(S^n) \) for arbitrary \( k,n>0 \). This is
+no easy task and has fueled the development of powerful 
+tools in algebraic topology.
+
+However, there is a much more definitive answer if one ignores torsion and
+takes the tensor product with \( \Q \). The goal of this paper is to
+show that for \( n \) even, we have
+\begin{equation}
+    \label{eq:even-spheres}
+    \pi_k(S^n)\otimes \Q \cong
+    \begin{cases}
+        \Q, &\text{ if }k=n \text{ or } k=2n-1\\
+        0 & \text{ otherwise}
+    \end{cases}
+\end{equation}
+while for \( n \) odd, we have
+\begin{equation}
+    \label{eq:odd-spheres}
+    \pi_k(S^n)\otimes \Q \cong
+    \begin{cases}
+        \Q, &\text{ if }k=n\\
+        0, &\text{ otherwise.}
+    \end{cases}
+\end{equation}
+The main ideas of the proof are taken from \cite[]{Ber12}. We
+will use the rational cohomology algebra of the \emph{Eilenber-Maclane
+spaces}
+ \( K(\Z, n) \) to find \emph{rational homotopy equivalences} between
+ the spheres and some spaces we already know the rational homotopy
+ groups of.  
+
+Chapter 2 introduces some of the main concepts, including
+\emph{Serre fibration} and the aforementioned Eilenberg-MacLane
+spaces. We also introduce \emph{homotopy fibres} and compute the
+homotopy groups of some homotopy fibres of Eilenberg-MacLane spaces which
+will be necessary for the proof when \( n \) is even. At the end of
+Chapter 2, we state equivalent conditions for a rational homotopy equivalence
+which shall allow us to exploit the algebra structure of the rational
+cohomology of \( K(\Z, n) \).
+Now, to compute \( H^*(K(\Z, n);\Q) \), we introduce, in Chapter 3,
+\emph{spectral sequences} and state the Leray-Serre spectral sequence,
+which allows us to perform the computations. Then, using some
+of the properties of \( K(\Z, n) \) introduced in Chapter 2, we find,
+in Chapter 4, the rational homotopy equivalences, which allow
+us to show the results in \cref{eq:even-spheres} and \cref{eq:odd-spheres}.
+
+\end{document}

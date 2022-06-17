@@ -1,8 +1,8 @@
-\documentclass[a4paper, article, oneside, UKenglish]{memoir}
+\documentclass[a4paper, article, oneside, UKenglish]{report}
 
 
 %% Title page
-\usepackage[MAT2000]{projectfp} % [MAT2000], [MAT2500], [MEK3200] or [STK-MAT2011]
+\usepackage[UKenglish]{uiomasterfp}
 
 
 %% Encoding
@@ -41,6 +41,8 @@
 \lstset{basicstyle = \ttfamily, frame = tb}
 \usepackage{enumitem}
 \usepackage{tikz-cd}
+\usepackage{spectralsequences}
+\usepackage{titling}
 
 
 %% Bibliography
@@ -130,33 +132,65 @@
 
 \usepackage{subfiles}
 
-\title{Homotopy Groups of Spheres}
+\title{Rational Homotopy Groups of Spheres}
 \author{Mika Bohinen}
-\supervisor{John Christian Ottem}
 % Multiple supervisors: \supervisor{Supervisor 1}{Supervisor 2}...{Supervisor n}
 % Skip supervisor for MAT2500
 
 \begin{document}
 
-
-\projectfrontpage
+\uiomasterfp[long=10,
+             dept={Department of Mathematics},
+             fac={},
+             program={MAT2000},
+             kind={Project work},
+             color=blue,
+             supervisor={John Christian Ottem}
+]
 
 
 \begin{abstract}
     \noindent
-    Brief summary of the paper.
-\end{abstract}
+    Homotopy groups of spheres are generally quite difficult to compute,
+    and they can behave quite erratic. We only focus on the non-torsion
+    part of these groups and aim to show that for \( n \) even, the
+    homotopy groups of \( S^n \) are torsion except for the \( n \)th and
+    \( 2n-1 \)th group, while for \( n \) odd, the homotopy groups of
+    \( S^n \) are torsion except for the \( n \)th group. The proof
+    relies on finding a rational homotopy equivalence between \( S^n \) 
+    and \( K(\Z, n) \) in the odd case and between \( S^n \) and
+    a certain homotopy fibre \( F \) in the even case. We establish
+    this link by using the Leray-Serre spectral sequence to 
+    calculate the rational cohomology algebra of \( K(\Z, n) \) in
+    the odd case and \( F \) in the even case.
+    
 
+\end{abstract}
+\section*{\centering{Acknowledgments}}
+I am incredibly grateful to my advisor,
+John Christian Ottem, who
+guided me through this project and suggested such an exciting
+topic to write about. Thanks should also go to the organizers of the
+course MAT2000 at UiO for providing this excellent opportunity and making it such
+a memorable experience. Lastly, I would be remiss in not mentioning the
+support from friends and family, especially my dad, who has always
+encouraged my endeavours in mathematics.
+\pagenumbering{roman}
+
+\tableofcontents
+\pagenumbering{arabic}
 
 \chapter{Introduction}
-
-Purpose of the paper, historical context, necessary background information and notation.
-
+\subfile{chapters/chapter1}
 
 \chapter{Basic Constructions}
 \subfile{chapters/chapter2}
 
+\chapter{Spectral sequences and the rational cohomology algebra of Eilenberg-MacLane spaces}
+\subfile{chapters/chapter4}
 
+\chapter{Proof of rational homotopy groups of spheres}
+\subfile{chapters/chapter5}
 \printbibliography
 
 
